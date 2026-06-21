@@ -1,0 +1,20 @@
+model Model
+	culture: en-IN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["AdventureWorks_Sales_2017"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table AdventureWorks_Sales_2017
+ref table DateTableTemplate_a4b4c6b3-b198-4acb-80bf-daca2fc8a74f
+ref table LocalDateTable_423e56b2-8395-4a27-ba66-b551420b1392
+
+ref cultureInfo en-IN
+

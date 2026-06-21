@@ -1,0 +1,92 @@
+table AdventureWorks_Sales_2017
+	lineageTag: e79dcec7-8ae6-4410-8c43-ab9dd77bc9c7
+
+	column OrderDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 810b6cc5-5241-4474-8c42-7d159f7adba0
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		variation Variation
+			isDefault
+			relationship: 2541002b-c1a7-43aa-9dce-e31eaf3aa139
+			defaultHierarchy: LocalDateTable_423e56b2-8395-4a27-ba66-b551420b1392.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column StockDate
+		dataType: string
+		lineageTag: 673b2b84-c742-4b00-b13d-2b1374d29e5b
+		summarizeBy: none
+		sourceColumn: StockDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderNumber
+		dataType: string
+		lineageTag: 26558beb-f11b-4df1-a71f-b100d796b31d
+		summarizeBy: none
+		sourceColumn: OrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		formatString: 0
+		lineageTag: f73713f7-260a-43c7-8c9f-01ad37e98f72
+		summarizeBy: count
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c2bfb7e-5d63-4a9d-9539-0c44f44ac2e1
+		summarizeBy: count
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TerritoryKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 8b084db5-5334-43e5-b581-7e7c3157fff4
+		summarizeBy: count
+		sourceColumn: TerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderLineItem
+		dataType: int64
+		formatString: 0
+		lineageTag: a547dadd-4f6f-4b5c-89c8-c1c4ad1c1d86
+		summarizeBy: sum
+		sourceColumn: OrderLineItem
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 71e267e4-e7bb-4e9b-a8e1-0235f4b2e1d9
+		summarizeBy: sum
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition AdventureWorks_Sales_2017 = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\C4Chetan\Downloads\AdventureWorks_Sales_2017.csv"),[Delimiter=",", Columns=8, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OrderDate", type date}, {"StockDate", type text}, {"OrderNumber", type text}, {"ProductKey", Int64.Type}, {"CustomerKey", Int64.Type}, {"TerritoryKey", Int64.Type}, {"OrderLineItem", Int64.Type}, {"OrderQuantity", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

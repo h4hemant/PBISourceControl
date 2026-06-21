@@ -1,0 +1,5 @@
+relationship 2541002b-c1a7-43aa-9dce-e31eaf3aa139
+	joinOnDateBehavior: datePartOnly
+	fromColumn: AdventureWorks_Sales_2017.OrderDate
+	toColumn: LocalDateTable_423e56b2-8395-4a27-ba66-b551420b1392.Date
+
